@@ -3,7 +3,7 @@ package router
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/hiro942/elden-app/controller"
-	"github.com/hiro942/sekiro/middleware"
+	"github.com/hiro942/elden-app/middleware"
 )
 
 // Routers initialize the main router

@@ -18,11 +18,13 @@ func SatelliteRegister(c *gin.Context) {
 
 	if r.Id == "" || r.PublicKey == "" {
 		response.FailWithMessage("blank argument error",c)
+		return
 	}
 
 	err := service.SatelliteRegister(r.Id, r.PublicKey)
 	if err != nil {
 		response.FailWithMessage(err.Error(), c)
+		return
 	}
 
 	response.OKWithMessage("register the satellite successfully", c)
@@ -39,11 +41,13 @@ func UserRegister(c *gin.Context) {
 
 	if r.Id == "" || r.MacAddr == "" || r.PublicKey == "" {
 		response.FailWithMessage("blank argument error",c)
+		return
 	}
 
 	err := service.UserRegister(r.Id, r.MacAddr, r.PublicKey)
 	if err != nil {
 		response.FailWithMessage(err.Error(), c)
+		return
 	}
 
 	response.OKWithMessage("register the device successfully", c)
@@ -60,11 +64,13 @@ func CreateAccessRecord(c *gin.Context) {
 
 	if r.Id == "" || r.MacAddr == "" || r.SatelliteId == "" {
 		response.FailWithMessage("blank argument error",c)
+		return
 	}
 
 	err := service.CreateAccessRecord(r.Id, r.MacAddr, r.SatelliteId, r.AccessRecord)
 	if err != nil {
 		response.FailWithMessage(err.Error(), c)
+		return
 	}
 
 	response.OKWithMessage("create access record successfully", c)
@@ -79,11 +85,13 @@ func GetSatellitePublicKey(c *gin.Context)  {
 
 	if id == "" {
 		response.FailWithMessage("blank argument error",c)
+		return
 	}
 
 	publicKey, err := service.GetSatellitePublicKey(id)
 	if err != nil {
 		response.FailWithMessage(err.Error(), c)
+		return
 	}
 
 	response.OKWithData(publicKey, c)
@@ -99,11 +107,13 @@ func GetUserPublicKey(c *gin.Context)  {
 
 	if id == "" || macAddr == ""{
 		response.FailWithMessage("blank argument error",c)
+		return
 	}
 
 	publicKey, err := service.GetUserPublicKey(id, macAddr)
 	if err != nil {
 		response.FailWithMessage(err.Error(), c)
+		return
 	}
 
 	response.OKWithData(publicKey, c)
@@ -119,11 +129,13 @@ func GetNodeById(c *gin.Context)  {
 
 	if id == "" {
 		response.FailWithMessage("blank argument error",c)
+		return
 	}
 
 	node, err := service.GetNodeById(id)
 	if err != nil {
 		response.FailWithMessage(err.Error(), c)
+		return
 	}
 
 	response.OKWithData(node, c)
@@ -137,6 +149,7 @@ func GetAllNodes(c *gin.Context) {
 	nodes, err := service.GetAllNodes()
 	if err != nil {
 		response.FailWithMessage(err.Error(), c)
+		return
 	}
 
 	response.OKWithData(nodes, c)

@@ -4,7 +4,6 @@ go 1.18
 
 require (
 	github.com/gin-gonic/gin v1.7.7
-	github.com/hiro942/sekiro v0.0.0-20220304040450-23cad241c385
 	github.com/hyperledger/fabric-gateway v1.0.1
 	github.com/pkg/errors v0.9.1
 	google.golang.org/grpc v1.45.0
