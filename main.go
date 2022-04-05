@@ -25,9 +25,18 @@ func main() {
 	global.Contract = utils.GetContract(gateway)
 
 	// initialize the ledger
-	if err = service.InitLedger(); err != nil {
-		fmt.Printf("%+v", err)
-	}
+	//if err = service.InitLedger(); err != nil {
+	//	fmt.Printf("%+v", err)
+	//}
+	service.InitLedger()
+
+	nodes, _ := service.GetAllNodes()
+	fmt.Println("$$$$$$$", nodes)
+
+	service.UserRegister("user-1", "macAddr-1", "123456")
+
+	nodes, _ = service.GetAllNodes()
+	fmt.Println("$$$$$$$", nodes)
 
 	// router start
 	sysRouter := router.Routers()
