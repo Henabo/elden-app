@@ -2,6 +2,11 @@ package model
 
 import "time"
 
+type Node2 struct {
+	Id            string      `json:"id"`
+	NodeType      string      `json:"nodeType"`
+}
+
 type Node struct {
 	Id            string      `json:"id"`
 	NodeType      string      `json:"nodeType"`

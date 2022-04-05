@@ -7,6 +7,25 @@ import (
 	"github.com/hiro942/elden-app/service"
 )
 
+func InitLedger2(c *gin.Context) {
+	err := service.InitLedger2()
+	if err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+
+	response.OKWithMessage("initialize the ledger successfully", c)
+}
+
+func GetAllNodes2(c *gin.Context) {
+	nodes, err := service.GetAllNodes2()
+	if err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+
+	response.OKWithData(nodes, c)
+}
 
 // @Summary initializes the ledger
 // @Router /node/initLedger [post]
