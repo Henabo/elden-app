@@ -26,7 +26,7 @@ func main() {
 
 	// initialize the ledger
 	if err = service.InitLedger(); err != nil {
-		fmt.Println(err.Error())
+		fmt.Printf("%+v", err)
 	}
 
 	// router start
