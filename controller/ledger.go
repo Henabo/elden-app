@@ -7,6 +7,20 @@ import (
 	"github.com/hiro942/elden-app/service"
 )
 
+
+// @Summary initializes the ledger
+// @Router /node/initLedger [post]
+
+func InitLedger(c *gin.Context) {
+	err := service.InitLedger()
+	if err != nil {
+		response.FailWithMessage(err.Error(), c)
+		return
+	}
+
+	response.OKWithMessage("initialize the ledger successfully", c)
+}
+
 // @Summary register satellite
 // @Produce  application/json
 // @Param data body request.SatelliteRegister
