@@ -5,8 +5,9 @@ import "time"
 type Node2 struct {
 	Id            string      `json:"id"`
 	NodeType      string      `json:"nodeType"`
-	CreatedAt     time.Time   `json:"createdAt"`
-	UpdatedAt     time.Time   `json:"updatedAt"`
+	PublicKey     interface{} `json:"publicKey"`
+	//CreatedAt     time.Time   `json:"createdAt"`
+	//UpdatedAt     time.Time   `json:"updatedAt"`
 }
 
 type Node struct {
