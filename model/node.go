@@ -5,7 +5,7 @@ import "time"
 type Node struct {
 	Id            string      `json:"id"`
 	NodeType      string      `json:"nodeType"`
-	PublicKeys    interface{} `json:"publicKeys"`
+	PublicKey    interface{} `json:"publicKey"`
 	AccessRecords interface{} `json:"accessRecords"`
 	CreatedAt     time.Time   `json:"createdAt"`
 	UpdatedAt     time.Time   `json:"updatedAt"`

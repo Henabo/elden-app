@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/hiro942/elden-app/global"
 	"github.com/hiro942/elden-app/router"
 	"github.com/hiro942/elden-app/service"
@@ -23,10 +24,12 @@ func main() {
 	// get contract from the FABRIC NET
 	global.Contract = utils.GetContract(gateway)
 
+	// initialize the ledger
 	if err = service.InitLedger(); err != nil {
-		log.Panicln(err)
+		fmt.Println(err.Error())
 	}
 
+	// router start
 	sysRouter := router.Routers()
 	sysRouter.Run(":8080")
 }

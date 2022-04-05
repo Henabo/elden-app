@@ -8,7 +8,6 @@ import (
 	"github.com/pkg/errors"
 )
 
-
 // CreateAccessRecord submit a transaction to create access record with the given arguments
 func CreateAccessRecord(id string, macAddr string, satelliteId string, userAccessRecord model.UserAccessRecord) error {
 	fmt.Println("Submit Transaction: CreateAccessRecord, add a new access record with given arguments.")
@@ -22,3 +21,5 @@ func CreateAccessRecord(id string, macAddr string, satelliteId string, userAcces
 	fmt.Println("*** Transaction committed successfully.")
 	return nil
 }
+
+
