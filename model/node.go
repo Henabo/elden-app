@@ -5,12 +5,14 @@ import "time"
 type Node2 struct {
 	Id            string      `json:"id"`
 	NodeType      string      `json:"nodeType"`
+	CreatedAt     time.Time   `json:"createdAt"`
+	UpdatedAt     time.Time   `json:"updatedAt"`
 }
 
 type Node struct {
 	Id            string      `json:"id"`
 	NodeType      string      `json:"nodeType"`
-	PublicKey    interface{} `json:"publicKey"`
+	PublicKey     interface{} `json:"publicKey"`
 	AccessRecords interface{} `json:"accessRecords"`
 	CreatedAt     time.Time   `json:"createdAt"`
 	UpdatedAt     time.Time   `json:"updatedAt"`
