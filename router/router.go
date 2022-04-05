@@ -15,6 +15,7 @@ func Routers() *gin.Engine {
 
 	NodeGroup := Router.Group("node")
 	{
+		NodeGroup.POST("/initLedger", controller.InitLedger)
 		NodeGroup.POST("/satellite/register", controller.SatelliteRegister)
 		NodeGroup.POST("/user/register", controller.UserRegister)
 		NodeGroup.POST("/user/accessRecord", controller.CreateAccessRecord)
