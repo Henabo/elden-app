@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/hiro942/elden-app/model/request"
 	"github.com/hiro942/elden-app/model/response"
@@ -14,7 +13,7 @@ import (
 func InitLedger(c *gin.Context) {
 	err := service.InitLedger()
 	if err != nil {
-		response.FailWithMessage(fmt.Sprintf("%+v", err), c)
+		response.FailWithMessage(err.Error(), c)
 		return
 	}
 
@@ -37,7 +36,7 @@ func SatelliteRegister(c *gin.Context) {
 
 	err := service.SatelliteRegister(r.Id, r.PublicKey)
 	if err != nil {
-		response.FailWithMessage(fmt.Sprintf("%+v", err), c)
+		response.FailWithMessage(err.Error(), c)
 		return
 	}
 
@@ -60,7 +59,7 @@ func UserRegister(c *gin.Context) {
 
 	err := service.UserRegister(r.Id, r.MacAddr, r.PublicKey)
 	if err != nil {
-		response.FailWithMessage(fmt.Sprintf("%+v", err), c)
+		response.FailWithMessage(err.Error(), c)
 		return
 	}
 
@@ -83,7 +82,7 @@ func CreateAccessRecord(c *gin.Context) {
 
 	err := service.CreateAccessRecord(r.Id, r.MacAddr, r.AccessRecord)
 	if err != nil {
-		response.FailWithMessage(fmt.Sprintf("%+v", err), c)
+		response.FailWithMessage(err.Error(), c)
 		return
 	}
 
@@ -104,7 +103,7 @@ func GetSatellitePublicKey(c *gin.Context) {
 
 	publicKey, err := service.GetSatellitePublicKey(id)
 	if err != nil {
-		response.FailWithMessage(fmt.Sprintf("%+v", err), c)
+		response.FailWithMessage(err.Error(), c)
 		return
 	}
 
@@ -126,7 +125,7 @@ func GetUserPublicKey(c *gin.Context) {
 
 	publicKey, err := service.GetUserPublicKey(id, macAddr)
 	if err != nil {
-		response.FailWithMessage(fmt.Sprintf("%+v", err), c)
+		response.FailWithMessage(err.Error(), c)
 		return
 	}
 
@@ -147,7 +146,7 @@ func GetNodeById(c *gin.Context) {
 
 	node, err := service.GetNodeById(id)
 	if err != nil {
-		response.FailWithMessage(fmt.Sprintf("%+v", err), c)
+		response.FailWithMessage(err.Error(), c)
 		return
 	}
 
@@ -161,7 +160,7 @@ func GetNodeById(c *gin.Context) {
 func GetAllNodes(c *gin.Context) {
 	nodes, err := service.GetAllNodes()
 	if err != nil {
-		response.FailWithMessage(fmt.Sprintf("%+v", err), c)
+		response.FailWithMessage(err.Error(), c)
 		return
 	}
 
