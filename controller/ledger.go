@@ -75,12 +75,12 @@ func CreateAccessRecord(c *gin.Context) {
 	r := request.CreateAccessRecord{}
 	_ = c.ShouldBindJSON(&r)
 
-	if r.Id == "" || r.MacAddr == "" || r.SatelliteId == "" {
+	if r.Id == "" || r.MacAddr == "" {
 		response.FailWithMessage("blank argument error",c)
 		return
 	}
 
-	err := service.CreateAccessRecord(r.Id, r.MacAddr, r.SatelliteId, r.AccessRecord)
+	err := service.CreateAccessRecord(r.Id, r.MacAddr, r.AccessRecord)
 	if err != nil {
 		response.FailWithMessage(err.Error(), c)
 		return
