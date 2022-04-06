@@ -3,14 +3,14 @@ package model
 type Node struct {
 	Id            string      `json:"id"`
 	NodeType      string      `json:"nodeType"`
-	PublicKey     interface{} `json:"publicKey"`
+	PublicKey     PublicKeys  `json:"publicKey"`
 	AccessRecords interface{} `json:"accessRecords"`
 	CreatedAt     string      `json:"createdAt"`
 	UpdatedAt     string      `json:"updatedAt"`
 }
 
-// UserPublicKeys is the struct of user's public key
-type UserPublicKeys map[string]string
+// PublicKeys indicates the structure how public keys are saved
+type PublicKeys map[string]string
 
 // UserAccessRecord is single access log
 type UserAccessRecord struct {

@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/hiro942/elden-app/model/request"
 	"github.com/hiro942/elden-app/model/response"
@@ -13,7 +14,7 @@ import (
 func InitLedger(c *gin.Context) {
 	err := service.InitLedger()
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage(fmt.Sprintf("%+v", err), c)
 		return
 	}
 
@@ -30,13 +31,13 @@ func SatelliteRegister(c *gin.Context) {
 	_ = c.ShouldBindJSON(&r)
 
 	if r.Id == "" || r.PublicKey == "" {
-		response.FailWithMessage("blank argument error",c)
+		response.FailWithMessage("blank argument error", c)
 		return
 	}
 
 	err := service.SatelliteRegister(r.Id, r.PublicKey)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage(fmt.Sprintf("%+v", err), c)
 		return
 	}
 
@@ -53,13 +54,13 @@ func UserRegister(c *gin.Context) {
 	_ = c.ShouldBindJSON(&r)
 
 	if r.Id == "" || r.MacAddr == "" || r.PublicKey == "" {
-		response.FailWithMessage("blank argument error",c)
+		response.FailWithMessage("blank argument error", c)
 		return
 	}
 
 	err := service.UserRegister(r.Id, r.MacAddr, r.PublicKey)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage(fmt.Sprintf("%+v", err), c)
 		return
 	}
 
@@ -76,13 +77,13 @@ func CreateAccessRecord(c *gin.Context) {
 	_ = c.ShouldBindJSON(&r)
 
 	if r.Id == "" || r.MacAddr == "" {
-		response.FailWithMessage("blank argument error",c)
+		response.FailWithMessage("blank argument error", c)
 		return
 	}
 
 	err := service.CreateAccessRecord(r.Id, r.MacAddr, r.AccessRecord)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage(fmt.Sprintf("%+v", err), c)
 		return
 	}
 
@@ -93,17 +94,17 @@ func CreateAccessRecord(c *gin.Context) {
 // @Param data body request.Register
 // @Router /node/satellite/publicKey?id=xxx [get]
 
-func GetSatellitePublicKey(c *gin.Context)  {
+func GetSatellitePublicKey(c *gin.Context) {
 	id := c.Query("id")
 
 	if id == "" {
-		response.FailWithMessage("blank argument error",c)
+		response.FailWithMessage("blank argument error", c)
 		return
 	}
 
 	publicKey, err := service.GetSatellitePublicKey(id)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage(fmt.Sprintf("%+v", err), c)
 		return
 	}
 
@@ -114,40 +115,39 @@ func GetSatellitePublicKey(c *gin.Context)  {
 // @Param query
 // @Router /node/user/publicKey?id=xxx&macAddr=xxx [get]
 
-func GetUserPublicKey(c *gin.Context)  {
+func GetUserPublicKey(c *gin.Context) {
 	id := c.Query("id")
 	macAddr := c.Query("macAddr")
 
-	if id == "" || macAddr == ""{
-		response.FailWithMessage("blank argument error",c)
+	if id == "" || macAddr == "" {
+		response.FailWithMessage("blank argument error", c)
 		return
 	}
 
 	publicKey, err := service.GetUserPublicKey(id, macAddr)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage(fmt.Sprintf("%+v", err), c)
 		return
 	}
 
 	response.OKWithData(publicKey, c)
 }
 
-
 // @Summary search node
 // @Param query
 // @Router /node/search?id=xxx [get]
 
-func GetNodeById(c *gin.Context)  {
+func GetNodeById(c *gin.Context) {
 	id := c.Query("id")
 
 	if id == "" {
-		response.FailWithMessage("blank argument error",c)
+		response.FailWithMessage("blank argument error", c)
 		return
 	}
 
 	node, err := service.GetNodeById(id)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage(fmt.Sprintf("%+v", err), c)
 		return
 	}
 
@@ -161,7 +161,7 @@ func GetNodeById(c *gin.Context)  {
 func GetAllNodes(c *gin.Context) {
 	nodes, err := service.GetAllNodes()
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithMessage(fmt.Sprintf("%+v", err), c)
 		return
 	}
 

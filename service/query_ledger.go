@@ -18,7 +18,10 @@ func GetAllNodes() ([]model.Node, error) {
 	}
 
 	var nodes []model.Node
-	_ = json.Unmarshal(nodesBytes, &nodes)
+	err = json.Unmarshal(nodesBytes, &nodes)
+	if err != nil {
+		return []model.Node{}, errors.Wrap(err, "json unmarshal error")
+	}
 
 	return nodes, nil
 }
@@ -33,7 +36,10 @@ func GetNodeById(id string) (model.Node, error) {
 	}
 
 	var node model.Node
-	_ = json.Unmarshal(nodeBytes, &node)
+	err = json.Unmarshal(nodeBytes, &node)
+	if err != nil {
+		return model.Node{}, errors.Wrap(err, "json unmarshal error")
+	}
 
 	return node, nil
 }
@@ -53,7 +59,7 @@ func GetSatellitePublicKey(id string) (string, error) {
 
 // GetUserPublicKey evaluates a transaction to read public key of user by id and mac address
 func GetUserPublicKey(id string, macAddr string) (string, error) {
-	fmt.Println("Evaluate Transaction: GetUserPublicKey, returns the satellite's public key.")
+	fmt.Println("Evaluate Transaction: GetUserPublicKey, returns the user's public key.")
 
 	publicKeyBytes, err := global.Contract.EvaluateTransaction("GetUserPublicKey", id, macAddr)
 	if err != nil {
