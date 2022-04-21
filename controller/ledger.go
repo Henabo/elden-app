@@ -11,13 +11,18 @@ import (
 // @Router /node/initLedger [post]
 
 func InitLedger(c *gin.Context) {
+	var (
+		DefaultSuccessMessage = "ledger initialization success"
+		DefaultErrorMessage   = "ledger initialization error"
+	)
+
 	err := service.InitLedger()
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithDescription(DefaultErrorMessage, err.Error(), c)
 		return
 	}
 
-	response.OKWithMessage("initialize the ledger successfully", c)
+	response.OKWithMessage(DefaultSuccessMessage, c)
 }
 
 // @Summary register satellite
@@ -29,18 +34,23 @@ func SatelliteRegister(c *gin.Context) {
 	r := request.SatelliteRegister{}
 	_ = c.ShouldBindJSON(&r)
 
+	var (
+		DefaultSuccessMessage = "register success"
+		DefaultErrorMessage   = "register error"
+	)
+
 	if r.Id == "" || r.PublicKey == "" {
-		response.FailWithMessage("blank argument error", c)
+		response.FailWithDescription(DefaultErrorMessage, "blank argument error", c)
 		return
 	}
 
 	err := service.SatelliteRegister(r.Id, r.PublicKey)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithDescription(DefaultErrorMessage, err.Error(), c)
 		return
 	}
 
-	response.OKWithMessage("register the satellite successfully", c)
+	response.OKWithMessage(DefaultSuccessMessage, c)
 }
 
 // @Summary register user for the given device
@@ -52,18 +62,23 @@ func UserRegister(c *gin.Context) {
 	r := request.UserRegister{}
 	_ = c.ShouldBindJSON(&r)
 
+	var (
+		DefaultSuccessMessage = "register success"
+		DefaultErrorMessage   = "register error"
+	)
+
 	if r.Id == "" || r.MacAddr == "" || r.PublicKey == "" {
-		response.FailWithMessage("blank argument error", c)
+		response.FailWithDescription(DefaultErrorMessage, "blank argument error", c)
 		return
 	}
 
 	err := service.UserRegister(r.Id, r.MacAddr, r.PublicKey)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithDescription(DefaultErrorMessage, err.Error(), c)
 		return
 	}
 
-	response.OKWithMessage("register the device successfully", c)
+	response.OKWithMessage(DefaultSuccessMessage, c)
 }
 
 // @Summary add access record for device
@@ -75,18 +90,23 @@ func CreateAccessRecord(c *gin.Context) {
 	r := request.CreateAccessRecord{}
 	_ = c.ShouldBindJSON(&r)
 
+	var (
+		DefaultSuccessMessage = "create access record success"
+		DefaultErrorMessage   = "create access record error"
+	)
+
 	if r.Id == "" || r.MacAddr == "" {
-		response.FailWithMessage("blank argument error", c)
+		response.FailWithDescription(DefaultErrorMessage, "blank argument error", c)
 		return
 	}
 
 	err := service.CreateAccessRecord(r.Id, r.MacAddr, r.AccessRecord)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithDescription(DefaultErrorMessage, err.Error(), c)
 		return
 	}
 
-	response.OKWithMessage("create access record successfully", c)
+	response.OKWithMessage(DefaultSuccessMessage, c)
 }
 
 // @Summary get satellite's public key
@@ -96,18 +116,23 @@ func CreateAccessRecord(c *gin.Context) {
 func GetSatellitePublicKey(c *gin.Context) {
 	id := c.Query("id")
 
+	var (
+		DefaultSuccessMessage = "getting satellite's public key success"
+		DefaultErrorMessage   = "getting satellite's public key error"
+	)
+
 	if id == "" {
-		response.FailWithMessage("blank argument error", c)
+		response.FailWithDescription(DefaultErrorMessage, "blank argument error", c)
 		return
 	}
 
 	publicKey, err := service.GetSatellitePublicKey(id)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithDescription(DefaultErrorMessage, err.Error(), c)
 		return
 	}
 
-	response.OKWithData(publicKey, c)
+	response.OKWithData(publicKey, DefaultSuccessMessage, c)
 }
 
 // @Summary get user's public key of the given device
@@ -118,18 +143,23 @@ func GetUserPublicKey(c *gin.Context) {
 	id := c.Query("id")
 	macAddr := c.Query("macAddr")
 
+	var (
+		DefaultSuccessMessage = "getting user's public key success"
+		DefaultErrorMessage   = "getting user's public key error"
+	)
+
 	if id == "" || macAddr == "" {
-		response.FailWithMessage("blank argument error", c)
+		response.FailWithDescription(DefaultErrorMessage, "blank argument error", c)
 		return
 	}
 
 	publicKey, err := service.GetUserPublicKey(id, macAddr)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithDescription(DefaultErrorMessage, err.Error(), c)
 		return
 	}
 
-	response.OKWithData(publicKey, c)
+	response.OKWithData(publicKey, DefaultSuccessMessage, c)
 }
 
 // @Summary search node
@@ -139,18 +169,23 @@ func GetUserPublicKey(c *gin.Context) {
 func GetNodeById(c *gin.Context) {
 	id := c.Query("id")
 
+	var (
+		DefaultSuccessMessage = "getting node success"
+		DefaultErrorMessage   = "getting node error"
+	)
+
 	if id == "" {
-		response.FailWithMessage("blank argument error", c)
+		response.FailWithDescription(DefaultErrorMessage, "blank argument error", c)
 		return
 	}
 
 	node, err := service.GetNodeById(id)
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithDescription(DefaultErrorMessage, err.Error(), c)
 		return
 	}
 
-	response.OKWithData(node, c)
+	response.OKWithData(node, DefaultSuccessMessage, c)
 }
 
 // @Summary search node
@@ -159,10 +194,16 @@ func GetNodeById(c *gin.Context) {
 
 func GetAllNodes(c *gin.Context) {
 	nodes, err := service.GetAllNodes()
+
+	var (
+		DefaultSuccessMessage = "getting all nodes success"
+		DefaultErrorMessage   = "getting all nodes error"
+	)
+
 	if err != nil {
-		response.FailWithMessage(err.Error(), c)
+		response.FailWithDescription(DefaultErrorMessage, err.Error(), c)
 		return
 	}
 
-	response.OKWithData(nodes, c)
+	response.OKWithData(nodes, DefaultSuccessMessage, c)
 }
