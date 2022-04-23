@@ -3,6 +3,7 @@ package service
 import (
 	"encoding/json"
 	"fmt"
+
 	"github.com/hiro942/elden-app/global"
 	"github.com/hiro942/elden-app/model"
 	"github.com/hyperledger/fabric-gateway/pkg/client"
@@ -34,6 +35,3 @@ func CreateAccessRecord(id string, macAddr string, userAccessRecord model.UserAc
 	fmt.Println("*** Transaction committed successfully.")
 	return nil
 }
-
-
-

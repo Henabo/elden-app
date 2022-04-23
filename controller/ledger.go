@@ -109,6 +109,34 @@ func CreateAccessRecord(c *gin.Context) {
 	response.OKWithMessage(DefaultSuccessMessage, c)
 }
 
+// @Summary add access record for device
+// @Produce application/json
+// @Param data body request.CreateAccessRecord
+// @Router /node/user/accessRecord [post]
+
+func ChangeAuthStatus(c *gin.Context) {
+	r := request.ChangeAuthStatus{}
+	_ = c.ShouldBindJSON(&r)
+
+	var (
+		DefaultSuccessMessage = "change authentication status success"
+		DefaultErrorMessage   = "change authentication status error"
+	)
+
+	if r.Id == "" {
+		response.FailWithDescription(DefaultErrorMessage, "blank argument error", c)
+		return
+	}
+
+	err := service.ChangeAuthStatus(r.Id)
+	if err != nil {
+		response.FailWithDescription(DefaultErrorMessage, err.Error(), c)
+		return
+	}
+
+	response.OKWithMessage(DefaultSuccessMessage, c)
+}
+
 // @Summary get satellite's public key
 // @Param data body request.Register
 // @Router /node/satellite/publicKey?id=xxx [get]
