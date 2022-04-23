@@ -109,10 +109,10 @@ func CreateAccessRecord(c *gin.Context) {
 	response.OKWithMessage(DefaultSuccessMessage, c)
 }
 
-// @Summary add access record for device
+// @Summary after successful authentication, change user's auth-status from "" to "ok"
 // @Produce application/json
-// @Param data body request.CreateAccessRecord
-// @Router /node/user/accessRecord [post]
+// @Param data body request.ChangeAuthStatus
+// @Router /node/user/changeAuthStatus [post]
 
 func ChangeAuthStatus(c *gin.Context) {
 	r := request.ChangeAuthStatus{}

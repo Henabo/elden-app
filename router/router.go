@@ -19,6 +19,7 @@ func Routers() *gin.Engine {
 		NodeGroup.POST("/satellite/register", controller.SatelliteRegister)
 		NodeGroup.POST("/user/register", controller.UserRegister)
 		NodeGroup.POST("/user/accessRecord", controller.CreateAccessRecord)
+		NodeGroup.POST("/user/changeAuthStatus", controller.ChangeAuthStatus)
 		NodeGroup.GET("/satellite/publicKey", controller.GetSatellitePublicKey)
 		NodeGroup.GET("/user/publicKey", controller.GetUserPublicKey)
 		NodeGroup.GET("/search", controller.GetNodeById)

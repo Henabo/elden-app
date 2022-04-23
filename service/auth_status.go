@@ -8,7 +8,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-// ChangeAuthStatus submit a transaction to create access record with the given arguments
+// ChangeAuthStatus submit a transaction to change user's auth-status
 func ChangeAuthStatus(id string) error {
 	fmt.Println("Async Submit Transaction: ChangeAuthStatus, change user's auth status.")
 
