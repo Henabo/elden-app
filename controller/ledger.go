@@ -137,6 +137,33 @@ func ChangeAuthStatus(c *gin.Context) {
 	response.OKWithMessage(DefaultSuccessMessage, c)
 }
 
+// @Summary delele node
+// @Param post + query
+// @Router /node/delete?id=xxx [post]
+
+func DeleteNodeById(c *gin.Context) {
+	id := c.Query("id")
+
+	var (
+		DefaultSuccessMessage = "getting node success"
+		DefaultErrorMessage   = "getting node error"
+	)
+
+	if id == "" {
+		response.FailWithDescription(DefaultErrorMessage, "blank argument error", c)
+		return
+	}
+
+	err := service.DeleteNodeById(id)
+	if err != nil {
+		response.FailWithDescription(DefaultErrorMessage, err.Error(), c)
+		return
+	}
+
+	response.OKWithMessage(DefaultSuccessMessage, c)
+}
+
+
 // @Summary get satellite's public key
 // @Param data body request.Register
 // @Router /node/satellite/publicKey?id=xxx [get]
