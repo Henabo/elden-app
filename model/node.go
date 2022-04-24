@@ -21,6 +21,7 @@ type Node struct {
 	NodeType     string            `json:"nodeType"`
 	PublicKey    PublicKeys        `json:"publicKey"`
 	AccessRecord UserAccessRecords `json:"accessRecord"`
+	Status       string            `json:"status"`
 	CreatedAt    string            `json:"createdAt"`
 	UpdatedAt    string            `json:"updatedAt"`
 }
