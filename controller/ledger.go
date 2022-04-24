@@ -163,7 +163,6 @@ func DeleteNodeById(c *gin.Context) {
 	response.OKWithMessage(DefaultSuccessMessage, c)
 }
 
-
 // @Summary get satellite's public key
 // @Param data body request.Register
 // @Router /node/satellite/publicKey?id=xxx [get]
