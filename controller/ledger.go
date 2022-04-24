@@ -145,8 +145,8 @@ func DeleteNodeById(c *gin.Context) {
 	id := c.Query("id")
 
 	var (
-		DefaultSuccessMessage = "getting node success"
-		DefaultErrorMessage   = "getting node error"
+		DefaultSuccessMessage = "deleting node success"
+		DefaultErrorMessage   = "deleting node error"
 	)
 
 	if id == "" {
