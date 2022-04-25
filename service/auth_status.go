@@ -9,10 +9,10 @@ import (
 )
 
 // ChangeAuthStatus submit a transaction to change user's auth-status
-func ChangeAuthStatus(id string) error {
+func ChangeAuthStatus(id string, authStatusCode string) error {
 	fmt.Println("Async Submit Transaction: ChangeAuthStatus, change user's auth status.")
 
-	_, commit, err := global.Contract.SubmitAsync("ChangeAuthStatus", client.WithArguments(id))
+	_, commit, err := global.Contract.SubmitAsync("ChangeAuthStatus", client.WithArguments(id, authStatusCode))
 	if err != nil {
 		return errors.Wrap(err, "failed to submit transaction")
 	}
