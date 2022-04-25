@@ -111,24 +111,23 @@ func CreateAccessRecord(c *gin.Context) {
 
 // @Summary after successful authentication, change user's auth-status from "" to "ok"
 // @Produce application/json
-// @Param data body request.ChangeAuthStatus
-// @Router /node/user/changeAuthStatus [post]
+// @Param data body null
+// @Router /node/user/changeAuthStatus?id=xxx [post]
 
 func ChangeAuthStatus(c *gin.Context) {
-	r := request.ChangeAuthStatus{}
-	_ = c.ShouldBindJSON(&r)
+	id := c.Query("id")
 
 	var (
 		DefaultSuccessMessage = "change authentication status success"
 		DefaultErrorMessage   = "change authentication status error"
 	)
 
-	if r.Id == "" {
+	if id == "" {
 		response.FailWithDescription(DefaultErrorMessage, "blank argument error", c)
 		return
 	}
 
-	err := service.ChangeAuthStatus(r.Id)
+	err := service.ChangeAuthStatus(id)
 	if err != nil {
 		response.FailWithDescription(DefaultErrorMessage, err.Error(), c)
 		return
