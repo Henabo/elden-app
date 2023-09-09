@@ -7,11 +7,11 @@ import (
 	"github.com/pkg/errors"
 )
 
-// DeleteNodeById delete the specific node by given id
-func DeleteNodeById(id string) error {
-	fmt.Println("Submit Transaction: DeleteNodeById, delete the specific node by given id")
+// DeleteNodeByID delete the specific node by given ID
+func DeleteNodeByID(ID string) error {
+	fmt.Println("Submit Transaction: DeleteNodeByID, delete the specific node by given ID")
 
-	_, err := global.Contract.SubmitTransaction("SatelliteRegister", id)
+	_, err := global.Contract.SubmitTransaction("DeleteNodeByID", ID)
 
 	if err != nil {
 		return errors.Wrap(err, "failed to submit transaction")

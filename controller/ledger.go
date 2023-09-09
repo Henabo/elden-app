@@ -39,12 +39,12 @@ func SatelliteRegister(c *gin.Context) {
 		DefaultErrorMessage   = "register error"
 	)
 
-	if r.Id == "" || r.PublicKey == "" {
+	if r.ID == "" || r.PublicKey == "" {
 		response.FailWithDescription(DefaultErrorMessage, "blank argument error", c)
 		return
 	}
 
-	err := service.SatelliteRegister(r.Id, r.PublicKey)
+	err := service.SatelliteRegister(r.ID, r.PublicKey)
 	if err != nil {
 		response.FailWithDescription(DefaultErrorMessage, err.Error(), c)
 		return
@@ -67,12 +67,12 @@ func UserRegister(c *gin.Context) {
 		DefaultErrorMessage   = "register error"
 	)
 
-	if r.Id == "" || r.MacAddr == "" || r.PublicKey == "" {
+	if r.ID == "" || r.MacAddr == "" || r.PublicKey == "" {
 		response.FailWithDescription(DefaultErrorMessage, "blank argument error", c)
 		return
 	}
 
-	err := service.UserRegister(r.Id, r.MacAddr, r.PublicKey)
+	err := service.UserRegister(r.ID, r.MacAddr, r.PublicKey)
 	if err != nil {
 		response.FailWithDescription(DefaultErrorMessage, err.Error(), c)
 		return
@@ -95,12 +95,12 @@ func CreateAccessRecord(c *gin.Context) {
 		DefaultErrorMessage   = "create access record error"
 	)
 
-	if r.Id == "" || r.MacAddr == "" {
+	if r.ID == "" || r.MacAddr == "" {
 		response.FailWithDescription(DefaultErrorMessage, "blank argument error", c)
 		return
 	}
 
-	err := service.CreateAccessRecord(r.Id, r.MacAddr, r.AccessRecord)
+	err := service.CreateAccessRecord(r.ID, r.MacAddr, r.AccessRecord)
 	if err != nil {
 		response.FailWithDescription(DefaultErrorMessage, err.Error(), c)
 		return
@@ -123,12 +123,12 @@ func ChangeAuthStatus(c *gin.Context) {
 		DefaultErrorMessage   = "change authentication status error"
 	)
 
-	if r.Id == "" {
+	if r.ID == "" {
 		response.FailWithDescription(DefaultErrorMessage, "blank argument error", c)
 		return
 	}
 
-	err := service.ChangeAuthStatus(r.Id, r.AuthStatusCode)
+	err := service.ChangeAuthStatus(r.ID, r.AuthStatusCode)
 	if err != nil {
 		response.FailWithDescription(DefaultErrorMessage, err.Error(), c)
 		return
@@ -139,22 +139,22 @@ func ChangeAuthStatus(c *gin.Context) {
 
 // @Summary delele node
 // @Param post + query
-// @Router /node/delete?id=xxx [post]
+// @Router /node/delete?ID=xxx [post]
 
-func DeleteNodeById(c *gin.Context) {
-	id := c.Query("id")
+func DeleteNodeByID(c *gin.Context) {
+	ID := c.Query("ID")
 
 	var (
 		DefaultSuccessMessage = "deleting node success"
 		DefaultErrorMessage   = "deleting node error"
 	)
 
-	if id == "" {
+	if ID == "" {
 		response.FailWithDescription(DefaultErrorMessage, "blank argument error", c)
 		return
 	}
 
-	err := service.DeleteNodeById(id)
+	err := service.DeleteNodeByID(ID)
 	if err != nil {
 		response.FailWithDescription(DefaultErrorMessage, err.Error(), c)
 		return
@@ -165,22 +165,22 @@ func DeleteNodeById(c *gin.Context) {
 
 // @Summary get satellite's public key
 // @Param data body request.Register
-// @Router /node/satellite/publicKey?id=xxx [get]
+// @Router /node/satellite/publicKey?ID=xxx [get]
 
 func GetSatellitePublicKey(c *gin.Context) {
-	id := c.Query("id")
+	ID := c.Query("ID")
 
 	var (
 		DefaultSuccessMessage = "getting satellite's public key success"
 		DefaultErrorMessage   = "getting satellite's public key error"
 	)
 
-	if id == "" {
+	if ID == "" {
 		response.FailWithDescription(DefaultErrorMessage, "blank argument error", c)
 		return
 	}
 
-	publicKey, err := service.GetSatellitePublicKey(id)
+	publicKey, err := service.GetSatellitePublicKey(ID)
 	if err != nil {
 		response.FailWithDescription(DefaultErrorMessage, err.Error(), c)
 		return
@@ -191,10 +191,10 @@ func GetSatellitePublicKey(c *gin.Context) {
 
 // @Summary get user's public key of the given device
 // @Param query
-// @Router /node/user/publicKey?id=xxx&macAddr=xxx [get]
+// @Router /node/user/publicKey?ID=xxx&macAddr=xxx [get]
 
 func GetUserPublicKey(c *gin.Context) {
-	id := c.Query("id")
+	ID := c.Query("ID")
 	macAddr := c.Query("macAddr")
 
 	var (
@@ -202,12 +202,12 @@ func GetUserPublicKey(c *gin.Context) {
 		DefaultErrorMessage   = "getting user's public key error"
 	)
 
-	if id == "" || macAddr == "" {
+	if ID == "" || macAddr == "" {
 		response.FailWithDescription(DefaultErrorMessage, "blank argument error", c)
 		return
 	}
 
-	publicKey, err := service.GetUserPublicKey(id, macAddr)
+	publicKey, err := service.GetUserPublicKey(ID, macAddr)
 	if err != nil {
 		response.FailWithDescription(DefaultErrorMessage, err.Error(), c)
 		return
@@ -218,22 +218,22 @@ func GetUserPublicKey(c *gin.Context) {
 
 // @Summary search node
 // @Param query
-// @Router /node/search?id=xxx [get]
+// @Router /node/search?ID=xxx [get]
 
-func GetNodeById(c *gin.Context) {
-	id := c.Query("id")
+func GetNodeByID(c *gin.Context) {
+	ID := c.Query("ID")
 
 	var (
 		DefaultSuccessMessage = "getting node success"
 		DefaultErrorMessage   = "getting node error"
 	)
 
-	if id == "" {
+	if ID == "" {
 		response.FailWithDescription(DefaultErrorMessage, "blank argument error", c)
 		return
 	}
 
-	node, err := service.GetNodeById(id)
+	node, err := service.GetNodeByID(ID)
 	if err != nil {
 		response.FailWithDescription(DefaultErrorMessage, err.Error(), c)
 		return

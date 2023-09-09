@@ -3,7 +3,6 @@ package utils
 import (
 	"crypto/x509"
 	"fmt"
-	"github.com/hyperledger/fabric-gateway/pkg/identity"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"io/ioutil"
@@ -30,19 +29,19 @@ func NewGrpcConnection(tlsCertPath string, gatewayPeer string, peerEndpoint stri
 	return connection
 }
 
-// NewIdentity creates a client identity for this gateway connection using x509 certificate.
-func NewIdentity(certPath string, mspID string) *identity.X509Identity {
+// NewIDentity creates a client IDentity for this gateway connection using x509 certificate.
+func NewIDentity(certPath string, mspID string) *IDentity.X509IDentity {
 	certificate, err := loadCertificate(certPath)
 	if err != nil {
 		log.Panicln(err)
 	}
 
-	id, err := identity.NewX509Identity(mspID, certificate)
+	ID, err := IDentity.NewX509IDentity(mspID, certificate)
 	if err != nil {
 		log.Panicln(err)
 	}
 
-	return id
+	return ID
 }
 
 func loadCertificate(filename string) (*x509.Certificate, error) {
@@ -50,11 +49,11 @@ func loadCertificate(filename string) (*x509.Certificate, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to read certificate file: %w", err)
 	}
-	return identity.CertificateFromPEM(certificatePEM)
+	return IDentity.CertificateFromPEM(certificatePEM)
 }
 
 // NewSign generates a digital signature from a message digest using a private key
-func NewSign(keyPath string) identity.Sign {
+func NewSign(keyPath string) IDentity.Sign {
 	files, err := ioutil.ReadDir(keyPath)
 	if err != nil {
 		log.Panicf("failed to read private key directory: %v", err)
@@ -64,12 +63,12 @@ func NewSign(keyPath string) identity.Sign {
 		log.Panicf("failed to read private key file: %v", err)
 	}
 
-	privateKey, err := identity.PrivateKeyFromPEM(privateKeyPEM)
+	privateKey, err := IDentity.PrivateKeyFromPEM(privateKeyPEM)
 	if err != nil {
 		log.Panicln(err)
 	}
 
-	sign, err := identity.NewPrivateKeySign(privateKey)
+	sign, err := IDentity.NewPrivateKeySign(privateKey)
 	if err != nil {
 		log.Panicln(err)
 	}

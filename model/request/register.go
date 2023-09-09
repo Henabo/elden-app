@@ -1,12 +1,12 @@
 package request
 
 type SatelliteRegister struct {
-	Id        string `json:"id"`
+	ID        string `json:"ID"`
 	PublicKey string `json:"publicKey"`
 }
 
 type UserRegister struct {
-	Id        string `json:"id"`
+	ID        string `json:"ID"`
 	MacAddr   string `json:"macAddr"`
 	PublicKey string `json:"publicKey"`
 }

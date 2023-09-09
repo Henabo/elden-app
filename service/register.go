@@ -8,10 +8,10 @@ import (
 )
 
 // SatelliteRegister submits a transaction to add public_key of the satellite to the state
-func SatelliteRegister(id string, publicKey string) error {
+func SatelliteRegister(ID string, publicKey string) error {
 	fmt.Println("Submit Transaction: SatelliteRegister, registers satellite by adding the public_key")
 
-	_, err := global.Contract.SubmitTransaction("SatelliteRegister", id, publicKey)
+	_, err := global.Contract.SubmitTransaction("SatelliteRegister", ID, publicKey)
 
 	if err != nil {
 		return errors.Wrap(err, "failed to submit transaction")
@@ -22,10 +22,10 @@ func SatelliteRegister(id string, publicKey string) error {
 }
 
 //// UserRegister submits a transaction to add public_key of the user to the state
-//func UserRegister(id string, macAddr string, publicKey string) error {
+//func UserRegister(ID string, macAddr string, publicKey string) error {
 //	fmt.Println("Submit Transaction: UserRegister, registers satellite by adding the public_key")
 //
-//	_, err := global.Contract.SubmitTransaction("UserRegister", id, macAddr, publicKey)
+//	_, err := global.Contract.SubmitTransaction("UserRegister", ID, macAddr, publicKey)
 //
 //	if err != nil {
 //		return errors.Wrap(err, "failed to submit transaction")
@@ -36,10 +36,10 @@ func SatelliteRegister(id string, publicKey string) error {
 //}
 
 // UserRegister submits a transaction to add public_key of the user to the state
-func UserRegister(id string, macAddr string, publicKey string) error {
+func UserRegister(ID string, macAddr string, publicKey string) error {
 	fmt.Println("Async Submit Transaction: UserRegister, registers satellite by adding the public_key")
 
-	_, commit, err := global.Contract.SubmitAsync("UserRegister", client.WithArguments(id, macAddr, publicKey))
+	_, commit, err := global.Contract.SubmitAsync("UserRegister", client.WithArguments(ID, macAddr, publicKey))
 	if err != nil {
 		return errors.Wrap(err, "failed to submit transaction")
 	}

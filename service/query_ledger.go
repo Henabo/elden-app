@@ -27,11 +27,11 @@ func GetAllNodes() ([]model.Node, error) {
 	return nodes, nil
 }
 
-// GetNodeById evaluates a transaction to read node by id
-func GetNodeById(id string) (model.Node, error) {
-	fmt.Println("Evaluate Transaction: GetNodeById, returns specific node by node-id.")
+// GetNodeByID evaluates a transaction to read node by ID
+func GetNodeByID(ID string) (model.Node, error) {
+	fmt.Println("Evaluate Transaction: GetNodeByID, returns specific node by node-ID.")
 
-	nodeBytes, err := global.Contract.EvaluateTransaction("GetNodeById", id)
+	nodeBytes, err := global.Contract.EvaluateTransaction("GetNodeByID", ID)
 	if err != nil {
 		return model.Node{}, errors.Wrap(err, "failed to evaluate transaction")
 	}
@@ -45,11 +45,11 @@ func GetNodeById(id string) (model.Node, error) {
 	return node, nil
 }
 
-// GetSatellitePublicKey evaluates a transaction to read public key of satellite by id
-func GetSatellitePublicKey(id string) (string, error) {
+// GetSatellitePublicKey evaluates a transaction to read public key of satellite by ID
+func GetSatellitePublicKey(ID string) (string, error) {
 	fmt.Println("Evaluate Transaction: GetSatellitePublicKey, returns the satellite's public key.")
 
-	publicKeyBytes, err := global.Contract.EvaluateTransaction("GetSatellitePublicKey", id)
+	publicKeyBytes, err := global.Contract.EvaluateTransaction("GetSatellitePublicKey", ID)
 	if err != nil {
 		return "", errors.Wrap(err, "failed to evaluate transaction")
 	}
@@ -58,11 +58,11 @@ func GetSatellitePublicKey(id string) (string, error) {
 	return publicKey, nil
 }
 
-// GetUserPublicKey evaluates a transaction to read public key of user by id and mac address
-func GetUserPublicKey(id string, macAddr string) (string, error) {
+// GetUserPublicKey evaluates a transaction to read public key of user by ID and mac address
+func GetUserPublicKey(ID string, macAddr string) (string, error) {
 	fmt.Println("Evaluate Transaction: GetUserPublicKey, returns the user's public key.")
 
-	publicKeyBytes, err := global.Contract.EvaluateTransaction("GetUserPublicKey", id, macAddr)
+	publicKeyBytes, err := global.Contract.EvaluateTransaction("GetUserPublicKey", ID, macAddr)
 	if err != nil {
 		return "", errors.Wrap(err, "failed to evaluate transaction")
 	}

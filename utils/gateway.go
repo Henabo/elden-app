@@ -8,10 +8,10 @@ import (
 )
 
 func NewGateway(clientConnection *grpc.ClientConn) (*client.Gateway, error) {
-	id := NewIdentity(global.CertPath, global.MspId)
+	ID := NewIDentity(global.CertPath, global.MspID)
 	sign := NewSign(global.KeyPath)
 	return client.Connect(
-		id,
+		ID,
 		client.WithSign(sign),
 		client.WithClientConnection(clientConnection),
 		// Default timeouts for different gRPC calls

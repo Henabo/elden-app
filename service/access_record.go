@@ -11,7 +11,7 @@ import (
 )
 
 // CreateAccessRecord submit a transaction to create access record with the given arguments
-func CreateAccessRecord(id string, macAddr string, userAccessRecord model.UserAccessRecord) error {
+func CreateAccessRecord(ID string, macAddr string, userAccessRecord model.UserAccessRecord) error {
 	fmt.Println("Async Submit Transaction: CreateAccessRecord, add a new access record with given arguments.")
 
 	userAccessRecordBytes, err := json.Marshal(&userAccessRecord)
@@ -19,7 +19,7 @@ func CreateAccessRecord(id string, macAddr string, userAccessRecord model.UserAc
 		return errors.Wrap(err, "json marshal error")
 	}
 
-	_, commit, err := global.Contract.SubmitAsync("CreateAccessRecord", client.WithArguments(id, macAddr, string(userAccessRecordBytes)))
+	_, commit, err := global.Contract.SubmitAsync("CreateAccessRecord", client.WithArguments(ID, macAddr, string(userAccessRecordBytes)))
 	if err != nil {
 		return errors.Wrap(err, "failed to submit transaction")
 	}
